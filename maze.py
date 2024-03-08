@@ -63,10 +63,14 @@ mixer.music.play()
 
 player = Player('hero.png', 5, H-80, 65,65,4)
 enemy = Enemy("cyborg.png", W-80, H-200, 65, 65, 1)
-treasure = GameSprite("treasure.png", W-100, H-100, 65, 65, 0)
-wall_1 = Wall((154,205,50), 100, 20, 450, 10)
-wall_2 = Wall((154,205,50), 100, 20, 10, 350)
-wall_3 = Wall((154,205,50), 100, 480, 350, 10)
+treasure = GameSprite("treasure.png", W-150, H-100, 65, 65, 0)
+wall_1 = Wall((153, 204, 255), 100, 20, 450, 10)
+wall_2 = Wall((153, 204, 255), 100, 20, 10, 350)
+wall_3 = Wall((153, 204, 255), 100, 480, 350, 10)
+wall_4 = Wall((153, 204, 255), 440, 130, 10, 350)
+wall_5 = Wall((153, 204, 255), 200, 130, 10, 350)
+wall_6 = Wall((153, 204, 255), 300, 20, 10, 350)
+wall_7 = Wall((153, 204, 255), 400, 130, 120, 10)
 
 
 game = True
@@ -89,5 +93,9 @@ while game:
     wall_1.draw()
     wall_2.draw()
     wall_3.draw()
+    wall_4.draw()
+    wall_5.draw()
+    wall_6.draw()
+    wall_7.draw()
     display.update()
     clock.tick(FPS)
