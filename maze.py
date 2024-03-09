@@ -60,6 +60,13 @@ bg = transform.scale(image.load("background.jpg"), (W,H))
 mixer.init()
 mixer.music.load('jungles.ogg')
 mixer.music.play()
+kick = mixer.Sound('kick.ogg')
+money = mixer.Sound('money.ogg')
+
+font.init()
+text1 = font.Font(None, 70)
+text_win = text1.render('YOU WIN!',1,(255,255,0))
+text_lose = text1.render('YOU LOSE',1,(255,255,0))
 
 player = Player('hero.png', 5, H-80, 65,65,4)
 enemy = Enemy("cyborg.png", W-80, H-200, 65, 65, 1)
@@ -84,18 +91,42 @@ while game:
 
     win.blit(bg, (0,0))
 
-    player.update()
-    player.reset()
-    enemy.update()
-    enemy.reset()
-    treasure.update()
-    treasure.reset()
-    wall_1.draw()
-    wall_2.draw()
-    wall_3.draw()
-    wall_4.draw()
-    wall_5.draw()
-    wall_6.draw()
-    wall_7.draw()
+    if not finish:
+        player.update()
+        player.reset()
+        enemy.update()
+        enemy.reset()
+        treasure.update()
+        treasure.reset()
+        wall_1.draw()
+        wall_2.draw()
+        wall_3.draw()
+        wall_4.draw()
+        wall_5.draw()
+        wall_6.draw()
+        wall_7.draw()
+
+        if (sprite.collide_rect(player, enemy) or
+            sprite.collide_rect(player, wall_1) or
+            sprite.collide_rect(player, wall_2) or
+            sprite.collide_rect(player, wall_3) or
+            sprite.collide_rect(player, wall_4) or
+            sprite.collide_rect(player, wall_5) or
+            sprite.collide_rect(player, wall_6) or
+                sprite.collide_rect(player, wall_7)):
+            finish = True
+            win.blit(text_lose, (200, 200))
+            kick.play()
+
+        if sprite.collide_rect(player, treasure):
+            finish = True
+            win.blit(text_win, (200, 200))
+            money.play()
+    else:
+        time.delay(3000)
+        player.rect.x = 5
+        player.rect.y = H-80
+        finish = False
+  
     display.update()
     clock.tick(FPS)
